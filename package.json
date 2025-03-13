@@ -8,7 +8,8 @@
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"build-ts": "tsc",
-		"build": "WEBPACK_BUILD_MODE=production webpack"
+		"build": "WEBPACK_BUILD_MODE=production webpack",
+		"dev": "WEBPACK_BUILD_MODE=development webpack --watch"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.24.6",

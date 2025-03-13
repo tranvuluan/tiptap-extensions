@@ -1,1 +1,1 @@
-{"version":3,"file":"ColorPicker.d.ts","sourceRoot":"","sources":["../../src/extensions/ColorPicker.tsx"],"names":[],"mappings":"AAGA,QAAA,MAAM,WAAW;;;6CAyDhB,CAAC;AAEF,OAAO,EAAE,WAAW,EAAE,CAAC"}
+{"version":3,"file":"ColorPicker.d.ts","sourceRoot":"","sources":["../../src/extensions/ColorPicker.tsx"],"names":[],"mappings":"AAGA,KAAK,MAAM,GAAG;IACZ,KAAK,EAAE,MAAM,CAAC;IACd,QAAQ,EAAE,CAAC,GAAG,IAAI,EAAE,GAAG,KAAK,IAAI,CAAC;IACjC,eAAe,CAAC,EAAE,CAAC,GAAG,IAAI,EAAE,GAAG,KAAK,IAAI,CAAC;CAC1C,CAAA;AAED,QAAA,MAAM,WAAW,yCAA0C,MAAM,4CA2DhE,CAAC;AAEF,OAAO,EAAE,WAAW,EAAE,CAAC"}

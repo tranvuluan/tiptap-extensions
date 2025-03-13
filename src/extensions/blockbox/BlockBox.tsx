@@ -87,7 +87,7 @@ export const BlockBox = Node.create<BlockBoxOptions>({
         default: '#F1F1F1',
       },
       paddingHorizontal: {
-        default: 10
+        default: 40
       },
       paddingVertical: {
         default: 10
@@ -137,6 +137,9 @@ export const BlockBox = Node.create<BlockBoxOptions>({
 const BlockBoxCustomView = (props: any) => {
   let { backgroundColor, paddingHorizontal, paddingVertical } = props.node.attrs;
   const [paddingStyle, setPaddingStyle] = useState({ paddingHorizontal, paddingVertical });
+
+  const isEditable = props.editor.isEditable;
+
   if (backgroundColor === 'transparent') {
     backgroundColor = "#ffffff"
   }
@@ -188,7 +191,7 @@ const BlockBoxCustomView = (props: any) => {
   return (
     <NodeViewWrapper>
       <div style={{ position: 'relative' }}>
-        <ColorPaddingStyle onStyleChange={handleStyleChange} style={{ right: 0, position: 'absolute', top: 0 }}  paddingProps={paddingStyle}/>
+        {isEditable && <ColorPaddingStyle onStyleChange={handleStyleChange} style={{ right: 0, position: 'absolute', top: 0 }} paddingProps={paddingStyle} />}
         <NodeViewContent className={`block-box`} as="div" style={{
           backgroundColor, paddingTop: paddingStyle.paddingVertical + "px", paddingBottom: paddingStyle.paddingVertical + "px",
           paddingLeft: paddingStyle.paddingHorizontal + "px", paddingRight: paddingStyle.paddingHorizontal + "px", minHeight: 20

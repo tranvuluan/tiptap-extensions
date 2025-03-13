@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-const ColorPicker = ({ color, onChange }) => {
+type TProps = {
+  color: string;
+  onChange: (...args: any) => void;
+  onDisplayStatus?: (...args: any) => void;
+}
+
+const ColorPicker = ({ color, onChange, onDisplayStatus }: TProps) => {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker);
+    onDisplayStatus(!displayColorPicker);
   };
 
   const handleClose = () => {
     setDisplayColorPicker(false);
+    onDisplayStatus(false);
   };
 
   const styles = {

@@ -6,6 +6,7 @@ import { Padding } from "./Padding";
 
 const ColorPaddingStyle = ({ style, onStyleChange, paddingProps }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [displayColorPicker, setDisplayColorPicker ] = useState(false);
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,11 +27,13 @@ const ColorPaddingStyle = ({ style, onStyleChange, paddingProps }) => {
   const isOpen = Boolean(anchorEl);
 
   return (
-    <Box sx={style}>
+    <Box sx={{ ...style}}>
+      {/* Trigger Button */}
       <IconButton onClick={handleOpen}>
-        <FaSlidersH size={20} />
+        <FaSlidersH size={20} /> {/* Using react-icons */}
       </IconButton>
 
+      {/* Popover Content */}
       <Popover
         open={isOpen}
         anchorEl={anchorEl}
@@ -51,8 +54,10 @@ const ColorPaddingStyle = ({ style, onStyleChange, paddingProps }) => {
             border: "1px solid",
             borderColor: "divider",
             width: "max-content",
+            height: displayColorPicker ? "160px" : "100%"
           }}
         >
+          {/* Background Color Picker */}
           <Box
             sx={{
               display: "flex",
@@ -67,9 +72,11 @@ const ColorPaddingStyle = ({ style, onStyleChange, paddingProps }) => {
             <ColorPicker
               color="white"
               onChange={(color) => onStyleChange("backgroundColor", color)}
+              onDisplayStatus={(status) => setDisplayColorPicker(status)}
             />
           </Box>
 
+          {/* Padding Controls */}
           <Padding
             onChange={handlePaddingChange}
             paddingHorizontal={paddingProps?.paddingHorizontal || 0}

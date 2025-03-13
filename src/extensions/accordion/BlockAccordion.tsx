@@ -71,7 +71,7 @@ export const BlockAccordion = Node.create({
   addAttributes() {
     return {
       backgroundColor: { default: "white" },
-      paddingHorizontal: { default: 10 },
+      paddingHorizontal: { default: 40 },
       paddingVertical: { default: 10 },
       title: {
         default: "Title",
@@ -93,7 +93,7 @@ export const BlockAccordion = Node.create({
   },
 });
 
-const BlockAccordionCustomView = ({ node, updateAttributes }) => {
+const BlockAccordionCustomView = ({ node, updateAttributes, editor }) => {
   const {
     backgroundColor = "#F1F1F1",
     paddingHorizontal,
@@ -102,10 +102,14 @@ const BlockAccordionCustomView = ({ node, updateAttributes }) => {
   } = node.attrs;
   const [paddingStyle, setPaddingStyle] = useState({ paddingHorizontal, paddingVertical });
   const [hovered, setHovered] = useState(false);
-
+  const isEditable = editor.isEditable;
 
   const handleStyleChange = (key, value) => {
     updateAttributes({ [key]: value });
+    setPaddingStyle((prev) => ({
+      ...prev,
+      [key]: value
+    }))
   };
 
   return (
@@ -113,15 +117,15 @@ const BlockAccordionCustomView = ({ node, updateAttributes }) => {
       <Box
         sx={{
           position: "relative",
-          border: "1px dashed #ccc",
+          border: isEditable ? "1px dashed #ccc" : "unset",
           borderRadius: 1,
           overflow: "hidden",
         }}
         className="block-accordion-container"
         onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+        onMouseLeave={() => setHovered(false)}
       >
-        <ColorPaddingStyle
+        {isEditable && <ColorPaddingStyle
           onStyleChange={handleStyleChange}
           style={{
             position: "absolute",
@@ -132,7 +136,7 @@ const BlockAccordionCustomView = ({ node, updateAttributes }) => {
             opacity: hovered ? 1 : 0,
             transition: '.3s'
           }}
-          paddingProps={paddingStyle} />
+          paddingProps={paddingStyle} />}
         <Accordion
           defaultExpanded
           sx={{
