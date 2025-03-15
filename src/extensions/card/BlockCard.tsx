@@ -1,5 +1,5 @@
 import { mergeAttributes, Node, wrappingInputRule } from "@tiptap/core";
-import { Box, Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, IconButton } from "@mui/material";
 import {
   NodeViewContent,
   NodeViewWrapper,
@@ -7,6 +7,8 @@ import {
 } from "@tiptap/react";
 import { AlignStyle } from "../AlignStyle";
 import { useState } from "react";
+import { FaLink } from 'react-icons/fa';
+import AddLinkPopover from "../AddLinkPopover";
 
 export const inputRegex = /^\s*>card\s$/;
 
@@ -73,11 +75,14 @@ export const BlockCard = Node.create({
     return {
       backgroundColor: { default: "#ffff" },
       cardAlignment: { default: "center" },
+      imageLink: {
+        default: "https://placehold.co/200x200?text=Image"
+      },
       width: {
-        default: 700,
+        default: null,
       },
       height: {
-        default: 393
+        default: null
       }
     };
   },
@@ -122,11 +127,28 @@ const BlockCardCustomView = ({ node, updateAttributes }) => {
     backgroundColor,
     cardAlignment,
     width,
-    height
+    height,
+    imageLink
   } = node.attrs;
   const [cardAlign, setCardAlign] = useState(cardAlignment);
   const [dimension, setDimension] = useState({ width, height });
   const [bgColor, setBgColor] = useState(backgroundColor);
+
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [link, setImageLink] = useState<string>(imageLink);
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLinkAdd = (link: string) => {
+    setImageLink(link);
+    updateAttributes({ "imageLink": link });
+  };
 
   const handleStyleChange = (key: "alignment" | "width" | "height" | "backgroundColor", value: any) => {
     let attr: string;
@@ -136,12 +158,12 @@ const BlockCardCustomView = ({ node, updateAttributes }) => {
         attr = "cardAlignment";
         break;
       case "width":
-        value = Number(value);
+        value = Number(value) < 80 ? 80 : Number(value);
         setDimension(prev => ({ ...prev, width: value }))
         attr = "width";
         break;
       case "height":
-        value = Number(value);
+        value = Number(value) < 80 ? 80 : Number(value);
         setDimension(prev => ({ ...prev, height: value }))
         attr = "height";
         break;
@@ -160,11 +182,19 @@ const BlockCardCustomView = ({ node, updateAttributes }) => {
       <Box sx={{ display: 'flex', alignItems: cardAlign, flexDirection: 'column' }}>
         <Card sx={{ position: 'relative', width: dimension.width }}>
           <AlignStyle dimension={dimension} style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'white' }} onStyleChange={handleStyleChange} backgroundColor={bgColor} />
+          <IconButton color="primary" onClick={handleButtonClick} sx={{position: "absolute", top: 0, left: 0}}>
+            <FaLink />
+          </IconButton>
+          <AddLinkPopover
+            anchorEl={anchorEl}
+            onClose={handlePopoverClose}
+            onLinkAdd={handleLinkAdd}
+          />
           <Box bgcolor={bgColor}>
             <CardMedia
               component="img"
-              sx={{ width: dimension.width, height: dimension.height, }}
-              image="https://placehold.co/200x200?text=Image"
+              sx={{ width: dimension.width || 'auto', height: dimension.height || 'auto', }}
+              image={link}
               alt="green iguana"
             />
             <CardContent>
