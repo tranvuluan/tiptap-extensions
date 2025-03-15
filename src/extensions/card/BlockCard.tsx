@@ -122,7 +122,7 @@ export const BlockCard = Node.create({
   },
 });
 
-const BlockCardCustomView = ({ node, updateAttributes }) => {
+const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
   const {
     backgroundColor,
     cardAlignment,
@@ -136,6 +136,7 @@ const BlockCardCustomView = ({ node, updateAttributes }) => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [link, setImageLink] = useState<string>(imageLink);
+  const isEditable = editor.isEditable;
 
   const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -181,15 +182,15 @@ const BlockCardCustomView = ({ node, updateAttributes }) => {
     <NodeViewWrapper>
       <Box sx={{ display: 'flex', alignItems: cardAlign, flexDirection: 'column' }}>
         <Card sx={{ position: 'relative', width: dimension.width }}>
-          <AlignStyle dimension={dimension} style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'white' }} onStyleChange={handleStyleChange} backgroundColor={bgColor} />
-          <IconButton color="primary" onClick={handleButtonClick} sx={{position: "absolute", top: 0, left: 0}}>
+          {isEditable && <AlignStyle dimension={dimension} style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'white' }} onStyleChange={handleStyleChange} backgroundColor={bgColor} />}
+          {isEditable && <IconButton color="primary" onClick={handleButtonClick} sx={{position: "absolute", top: 0, left: 0}}>
             <FaLink />
-          </IconButton>
-          <AddLinkPopover
+          </IconButton>}
+          {isEditable && <AddLinkPopover
             anchorEl={anchorEl}
             onClose={handlePopoverClose}
             onLinkAdd={handleLinkAdd}
-          />
+          />}
           <Box bgcolor={bgColor}>
             <CardMedia
               component="img"
