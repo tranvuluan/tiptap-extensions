@@ -152,6 +152,7 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
   };
 
   const handleStyleChange = (key: "alignment" | "width" | "height" | "backgroundColor", value: any) => {
+
     let attr: string;
     switch (key) {
       case "alignment":
@@ -159,12 +160,22 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
         attr = "cardAlignment";
         break;
       case "width":
-        value = Number(value) < 80 ? 80 : Number(value);
+        value = Number(value);
+        if (value < 80) {
+          setTimeout(() => {
+            handleStyleChange("width", 80)
+          }, 500)
+        }
         setDimension(prev => ({ ...prev, width: value }))
         attr = "width";
         break;
       case "height":
-        value = Number(value) < 80 ? 80 : Number(value);
+        value = Number(value);
+        if (value < 80) {
+          setTimeout(() => {
+            handleStyleChange("width", 80)
+          }, 500)
+        }
         setDimension(prev => ({ ...prev, height: value }))
         attr = "height";
         break;
@@ -183,7 +194,7 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
       <Box sx={{ display: 'flex', alignItems: cardAlign, flexDirection: 'column' }}>
         <Card sx={{ position: 'relative', width: dimension.width }}>
           {isEditable && <AlignStyle dimension={dimension} style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'white' }} onStyleChange={handleStyleChange} backgroundColor={bgColor} />}
-          {isEditable && <IconButton color="primary" onClick={handleButtonClick} sx={{position: "absolute", top: 0, left: 0}}>
+          {isEditable && <IconButton color="primary" onClick={handleButtonClick} sx={{ position: "absolute", top: 0, left: 0 }}>
             <FaLink />
           </IconButton>}
           {isEditable && <AddLinkPopover
@@ -199,10 +210,13 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
               alt="green iguana"
             />
             <CardContent>
-              <NodeViewContent
-                className="block-card"
-                as="div"
-              />
+              <Box
+                sx={{ width: dimension.width }}>
+                <NodeViewContent
+                  className="block-card"
+                  as="div"
+                />
+              </Box>
             </CardContent>
           </Box>
         </Card>
