@@ -6,7 +6,7 @@ import {
   ReactNodeViewRenderer,
 } from "@tiptap/react";
 import { AlignStyle } from "../AlignStyle";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaLink } from 'react-icons/fa';
 import AddLinkPopover from "../AddLinkPopover";
 
@@ -137,6 +137,7 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [link, setImageLink] = useState<string>(imageLink);
   const isEditable = editor.isEditable;
+  const debounceResetDimension = useRef<any>();
 
   const handleButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -152,7 +153,6 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
   };
 
   const handleStyleChange = (key: "alignment" | "width" | "height" | "backgroundColor", value: any) => {
-
     let attr: string;
     switch (key) {
       case "alignment":
@@ -161,21 +161,11 @@ const BlockCardCustomView = ({ node, updateAttributes, editor }) => {
         break;
       case "width":
         value = Number(value);
-        if (value < 80) {
-          setTimeout(() => {
-            handleStyleChange("width", 80)
-          }, 500)
-        }
         setDimension(prev => ({ ...prev, width: value }))
         attr = "width";
         break;
       case "height":
         value = Number(value);
-        if (value < 80) {
-          setTimeout(() => {
-            handleStyleChange("width", 80)
-          }, 500)
-        }
         setDimension(prev => ({ ...prev, height: value }))
         attr = "height";
         break;
