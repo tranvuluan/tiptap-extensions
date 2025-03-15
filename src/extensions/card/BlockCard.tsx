@@ -76,13 +76,13 @@ export const BlockCard = Node.create({
       backgroundColor: { default: "#ffff" },
       cardAlignment: { default: "center" },
       imageLink: {
-        default: "https://placehold.co/200x200?text=Image"
+        default: "https://placehold.co/100x100?text=Image"
       },
       width: {
-        default: null,
+        default: 100,
       },
       height: {
-        default: null
+        default: 100
       }
     };
   },
