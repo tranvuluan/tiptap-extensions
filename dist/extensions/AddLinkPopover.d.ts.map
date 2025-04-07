@@ -1,0 +1,1 @@
+{"version":3,"file":"AddLinkPopover.d.ts","sourceRoot":"","sources":["../../src/extensions/AddLinkPopover.tsx"],"names":[],"mappings":"AAGA,UAAU,mBAAmB;IAC3B,QAAQ,EAAE,WAAW,GAAG,IAAI,CAAC;IAC7B,OAAO,EAAE,MAAM,IAAI,CAAC;IACpB,SAAS,EAAE,CAAC,IAAI,EAAE,MAAM,KAAK,IAAI,CAAC;CACnC;AAED,QAAA,MAAM,cAAc,EAAE,KAAK,CAAC,EAAE,CAAC,mBAAmB,CAuCjD,CAAC;AAEF,eAAe,cAAc,CAAC"}
