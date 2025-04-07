@@ -1,6 +1,6 @@
 {
 	"name": "tiptap-extensions",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"files": [
 		"dist"
 	],
@@ -31,11 +31,11 @@
 		"webpack-cli": "^5.1.4"
 	},
 	"dependencies": {
-		"@emotion/styled": "^11.13.5",
 		"@emotion/react": "^11.13.5",
-		"@mui/styled-engine-sc": "^6.1.9",
+		"@emotion/styled": "^11.13.5",
 		"@mui/icons-material": "^6.3.1",
 		"@mui/material": "^6.3.1",
+		"@mui/styled-engine-sc": "^6.1.9",
 		"@tiptap/core": "2.1.13",
 		"@tiptap/extension-color": "latest",
 		"@tiptap/extension-list-item": "2.1.13",
@@ -53,6 +53,5 @@
 		"react-dom": "^18.0.0",
 		"react-icons": "^5.4.0",
 		"tippy.js": "^6.3.7"
-	},
-	"packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
+	}
 }

@@ -3,10 +3,11 @@ const path = require('path');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const outputPath = process.env.OUTPUT_PATH || 'dist';
+let outputPath = process.env.OUTPUT_PATH || 'dist';
 const buildMode = process.env.WEBPACK_BUILD_MODE || 'development';
 console.log('Webpack build mode: ', buildMode);
 console.log('Webpack build output path: ', outputPath);
+// outputPath = '/Users/luantran/Documents/Research/pnpm-cra/tiptap-extensions/dist'
 
 const envPlugin =
   buildMode === 'development'
@@ -19,7 +20,7 @@ module.exports = {
     main: './src/index.ts',
     vendor: ['react', 'lodash'],
   },
-  plugins: [new MiniCssExtractPlugin(), envPlugin],
+  plugins: [new MiniCssExtractPlugin()],
   watch: false,
   performance: { hints: false },
   module: {

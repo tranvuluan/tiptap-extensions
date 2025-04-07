@@ -6,8 +6,8 @@
         "jsx": "react-jsx",
         "declaration": true,
         "declarationMap": true,
-        "outDir": "dist",
-        "skipLibCheck": true
+        // "outDir": "/Users/luantran/Documents/Research/pnpm-cra/tiptap-extensions/dist",
+        "skipLibCheck": true,
     },
     "include": ["src"]
 }

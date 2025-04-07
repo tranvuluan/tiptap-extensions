@@ -1,0 +1,17 @@
+.block-accordion-container {
+    .MuiAccordionSummary-content {
+        margin: 0 !important;
+    }
+    .Mui-expanded {
+        min-height: unset !important;
+        margin: 0 !important;
+    }
+
+    .MuiPaper-elevation h3::before{
+        content: unset !important;
+    }
+    .MuiPaper-elevation input {
+        height: 48px !important;
+        font-weight: bold;
+    }
+}

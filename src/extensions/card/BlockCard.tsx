@@ -9,6 +9,7 @@ import { AlignStyle } from "../AlignStyle";
 import { useRef, useState } from "react";
 import { FaLink } from 'react-icons/fa';
 import AddLinkPopover from "../AddLinkPopover";
+import './style.css';
 
 export const inputRegex = /^\s*>card\s$/;
 

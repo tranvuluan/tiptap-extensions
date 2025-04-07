@@ -8,6 +8,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Box, TextField } from "@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ColorPaddingStyle } from "../ColorPaddingStyle";
 import { useState } from "react";
+import './style.css';
 
 const inputRegex = /^\s*>accordion\s$/;
 
@@ -70,7 +71,7 @@ export const BlockAccordion = Node.create({
 
   addAttributes() {
     return {
-      backgroundColor: { default: "white" },
+      backgroundColor: { default: "#41414141" },
       paddingHorizontal: { default: 40 },
       paddingVertical: { default: 10 },
       title: {
@@ -140,16 +141,15 @@ const BlockAccordionCustomView = ({ node, updateAttributes, editor }) => {
         <Accordion
           defaultExpanded
           sx={{
-            backgroundColor: backgroundColor,
+            // backgroundColor: backgroundColor,
           }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={{
-              backgroundColor: "transparent",
+              backgroundColor: backgroundColor,
               '& .MuiAccordionSummary-content': {
                 margin: '0',
-
               },
             }}
 
@@ -169,8 +169,8 @@ const BlockAccordionCustomView = ({ node, updateAttributes, editor }) => {
           <AccordionDetails
             sx={{
               padding: `${paddingVertical}px ${paddingHorizontal}px`,
-              backgroundColor:
-                backgroundColor === "transparent" ? "#ffffff" : backgroundColor,
+              // backgroundColor:
+              // backgroundColor === "transparent" ? "#ffffff" : backgroundColor,
               minHeight: 70,
             }}
           >
